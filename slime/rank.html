@@ -61,6 +61,7 @@ for (var slime in data['slimes']) {
 
 	slimeItem.find('.name').html(data['slimes'][slime]['name']);
 	link = 'https://opensea.io/collection/slimes-world?search[query]=' + data['slimes'][slime]['id'];
+	if ( data['slimes'][slime]['id'] == '500' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094648825355173889'}
 	slimeItem.attr('href', link);
 	image = "https://slimes.world/image/image.jpg?slimeNumber=" + data['slimes'][slime]['id'] + "&size=200";
 
