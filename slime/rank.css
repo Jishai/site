@@ -195,6 +195,7 @@ a:active {
   }
   .slimeContainer .rank {
     transform: none;
+    border-radius: 3px 0 3px 0;
   }
   .slimeContainer .wrapperDetails {
     padding: 14px;
