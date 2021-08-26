@@ -29,7 +29,6 @@ a:active {
 
 .header {
   margin-top: 40px;
-  margin-bottom: 60px;
   text-align: center;
   width: 60vw;
 }
@@ -38,16 +37,24 @@ a:active {
   font-size: 60px;
   font-weight: 900;
   color: #212529;
+  line-height: 55px;
 }
 
-.header .subTitle {
+.header .subtitle {
   font-size: 20px;
   color: #798C9C;
 }
 
+.header .subtitle.madeBy {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+
 .slimeContainer {
   display:grid;
-  margin-top:-4px;
+  margin-top: 20px;
   grid-template-columns:auto auto auto;
   grid-column-gap:50px;
   grid-row-gap:30px
