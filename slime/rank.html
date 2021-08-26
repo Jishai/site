@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
-<link href="slimerank.css" rel="stylesheet" media="all" />
+<link href="rank.css" rel="stylesheet" media="all" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Slime Rank</title>
 <meta name="description" content="All the Slimes, ordered by their rarity rank">
@@ -30,7 +30,7 @@
 		<div class="itemContent">
 			<div class="wrapperImage">
 				<div class="rank">1</div>
-				<div class="image"><img src="https://slimes.world/image/image.jpg?slimeNumber=50&size=200" /></div>
+				<div class="image"><img src="./skeleton.jpeg" /></div>
 			</div>
 			<div class="wrapperDetails">
 				<div class="name"></div>
@@ -58,7 +58,11 @@ for (var slime in data['slimes']) {
 	link = 'https://opensea.io/collection/slimes-world?search[query]=' + data['slimes'][slime]['id'];
 	slimeItem.attr('href', link);
 	image = "https://slimes.world/image/image.jpg?slimeNumber=" + data['slimes'][slime]['id'] + "&size=200";
-	slimeItem.find('.image img').attr('src',image);
+	
+	setTimeout(function(slimeItem, image) {
+		slimeItem.find('.image img').attr('src',image);
+	},data['slimes'][slime]['rank']*20, slimeItem, image)
+	
 
 	if (data['slimes'][slime]['accessory1'] != "") {
 		accessory1 = '<br>' + data['slimes'][slime]['accessory1'] + ' - ' + parseFloat(data['slimes'][slime]['accessory1_prob']*100).toFixed(2)+"%"
@@ -100,10 +104,8 @@ for (var slime in data['slimes']) {
 
 }
 
-</script>
 
 
 </script>
-
 </body>
 </html>
