@@ -25,7 +25,7 @@
 
 <div class="header">
 	<div class="title">Slime Rank</div>
-	<div class="subtitle">All the Slimes, ordered by their rarity rank based on the 750 Slimes already dropped. The rank will be updated daily to reflect new drops.</div>
+	<div class="subtitle">All the Slimes, ordered by their rarity rank based on the 800 Slimes already dropped. The rank will be updated daily to reflect new drops.</div>
 	<div class="subtitle madeBy">made with ♥ by <a href="https://twitter.com/Jishai" target="_blank">Jishai</a></div>
 </div>
 
@@ -47,7 +47,7 @@
 
 
 
-<script src="slimeData.js?v2"></script>
+<script src="slimeData.js?v3"></script>
 
 <script type="text/javascript">
 
@@ -72,6 +72,7 @@ for (var slime in data['slimes']) {
 	if ( data['slimes'][slime]['id'] == '666' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094759876029579265'}
 	if ( data['slimes'][slime]['id'] == '700' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094868727680729089'}
 	if ( data['slimes'][slime]['id'] == '750' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094923703262117889'}
+	if ( data['slimes'][slime]['id'] == '800' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094978678843506689'}
 
 
 	slimeItem.attr('href', link);
