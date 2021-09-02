@@ -29,6 +29,12 @@
 	<div class="subtitle madeBy">made with ♥ by <a href="https://twitter.com/Jishai" target="_blank">Jishai</a></div>
 </div>
 
+<div class="filters">
+	<div class="adoptionFilter">
+		<div class="toggle press" data-status="off"></div>
+		<div class="filterLabel">Hide adopted slimes</div>
+	</div>
+</div>
 
 <div class="slimeContainer">
 	<a class="item hide" href="https://opensea.io/collection/slimes-world" target="_blank">
@@ -51,36 +57,22 @@
 
 <script type="text/javascript">
 
+i = 0;
 
 
 for (var slime in data['slimes']) {
 
 	slimeItem = $('.item.hide').clone().removeClass('hide');
+	slimeItem.attr('data-token', data['slimes'][slime]['token'])
 	slimeItem.find('.rank').html(data['slimes'][slime]['rank']);
 	slimeItem.attr('data-rank', data['slimes'][slime]['rank']);
-
+	slimeItem.attr('data-id', data['slimes'][slime]['id']);
 	slimeItem.find('.name').html(data['slimes'][slime]['name']);
-	link = 'https://opensea.io/collection/slimes-world?search[query]=' + data['slimes'][slime]['id'];
-
-	if ( data['slimes'][slime]['id'] == '500' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094648825355173889'}
-	if ( data['slimes'][slime]['id'] == '250' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094372847936602113'}
-	if ( data['slimes'][slime]['id'] == '200' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094316772843585537'}
-	if ( data['slimes'][slime]['id'] == '400' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094538874192396289'}
-	if ( data['slimes'][slime]['id'] == '150' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094262896773824513'}
-	if ( data['slimes'][slime]['id'] == '350' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094483898611007489'}
-	if ( data['slimes'][slime]['id'] == '600' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094758776517951489'}
-	if ( data['slimes'][slime]['id'] == '666' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094759876029579265'}
-	if ( data['slimes'][slime]['id'] == '700' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094868727680729089'}
-	if ( data['slimes'][slime]['id'] == '750' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094923703262117889'}
-	if ( data['slimes'][slime]['id'] == '800' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627094978678843506689'}
-	if ( data['slimes'][slime]['id'] == '850' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627095033654424895489'}
-	if ( data['slimes'][slime]['id'] == '900' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627095087530494656513'}
-	if ( data['slimes'][slime]['id'] == '950' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627095142506076045313'}
-	if ( data['slimes'][slime]['id'] == '1000' ) { link = 'https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/10412770908511994177358155058334661440323427102298504663627095198581169061889'}
-
-
+	
+	link = data['slimes'][slime]['permalink'];
 	slimeItem.attr('href', link);
-	image = "https://slimes.world/image/image.jpg?slimeNumber=" + data['slimes'][slime]['id'] + "&size=200";
+	
+	image = data['slimes'][slime]['image']+'=s200';
 
 	setTimeout(function(slimeItem, image) {
 		slimeItem.find('.image img').attr('src',image);
@@ -123,11 +115,84 @@ for (var slime in data['slimes']) {
 																 accessory6
 																 );
 
+
+
+	checkToken(data['slimes'][slime]['token']);
+
+
 	$('.slimeContainer').append(slimeItem);
+
 
 }
 
 
+
+
+function checkToken(token)  {
+
+
+		const settings = {
+		  "async": true,
+		  "crossDomain": true,
+		  "url": "https://api.opensea.io/api/v1/asset/0x495f947276749ce646f68ac8c248420045cb7b5e/"+token+"/",
+		  "method": "GET",
+		  "headers": {}
+		};
+
+		$.ajax(settings).done(function (response) {
+
+			backToken = response['token_id'];
+
+			if (response['num_sales'] == 0 &&
+				response['top_ownerships'][0]['owner']['user']['username'] == 'galshir' 
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627095186486541156353'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627095141406564417537'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627095109520727212033' 
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627095087530494656513'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627095080933424889857'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094994072006295553'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094983076890017793'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094917106192351233'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094897314983051265'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094878623285379073'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094873125727240193'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094817050634223617'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094757677006323713'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094707099471446017'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094682910215634945'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094681810704007169'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094670815587729409'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094660919983079425'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094658720959823873'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094651024378429441'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094558665401696257'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094546570773790721'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094483898611007489'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094372847936602113'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627094316772843585537'
+				&& backToken != '10412770908511994177358155058334661440323427102298504663627095182088494645249'
+				) {
+				$('.item[data-token='+backToken+']').attr('data-adopted', 'false');
+			} else {
+				$('.item[data-token='+backToken+']').attr('data-adopted', 'true');
+			}
+		});
+
+}
+
+function adoptedButton() {
+	$('[data-adopted=true]').hide();
+}
+
+$('.toggle').click(function() {
+	if ( $(this).attr('data-status') == 'off' ) {
+		$(this).attr('data-status', 'on');
+		$('[data-adopted=true]').hide();
+	} else {
+		$(this).attr('data-status', 'off');	
+		$('[data-adopted=true]').show();
+	}
+});
 
 </script>
 </body>

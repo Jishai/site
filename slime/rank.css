@@ -164,6 +164,10 @@ a:active {
 }
 
 
+.slimeContainer .image {
+  width: 200px;
+}
+
 .slimeContainer .image img {
   border-radius: 3px 0 0 3px;
   width: 100%;
@@ -184,6 +188,52 @@ a:active {
     font-size: 12px;
     text-transform: uppercase;
 }
+
+.adoptionFilter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.toggle{
+  width:40px;
+  height:22px;
+  background-color:#555;
+  border-radius:20px;
+  cursor:pointer;
+  transition:all .2s;
+  display: inline-block;
+}
+
+.toggle:after{
+  content:" ";
+  display:block;
+  height:18px;
+  width:18px;
+  border-radius:100%;
+  background-color:#fff;
+  margin:2px;
+  left:0;
+  position:relative;
+  box-sizing:border-box;
+  transition:all .2s
+}
+
+.toggle[data-status=on]{
+  background-image: linear-gradient(90deg, #FFD945 0%, #FFB000 22%, #F35800 39%, #C50089 66%, #590DE7 100%);}
+
+.toggle[data-status=on]:after{left:18px}
+
+.adoptionFilter .filterLabel {
+  color:  #798C9C;
+  font-size: 16px;
+  display: inline-block;
+  line-height: 18px;
+  margin-left:  10px;
+}
+
 
 @media screen and (max-width:500px){
   .slimeContainer .item {
