@@ -72,12 +72,12 @@ for (var slime in data['slimes']) {
 	link = data['slimes'][slime]['permalink'];
 	slimeItem.attr('href', link);
 	
-	image = data['slimes'][slime]['image']+'=s200';
+	image = data['slimes'][slime]['image'];
 
 	console.log(image);
 
 	setTimeout(function(slimeItem, image) {
-		slimeItem.find('.image img').attr('src',image);
+		slimeItem.find('.image img').attr('src',image+'=s200');
 	},data['slimes'][slime]['rank']*20, slimeItem, image)
 
 
