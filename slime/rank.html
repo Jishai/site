@@ -74,6 +74,8 @@ for (var slime in data['slimes']) {
 	
 	image = data['slimes'][slime]['image']+'=s200';
 
+	console.log(image);
+
 	setTimeout(function(slimeItem, image) {
 		slimeItem.find('.image img').attr('src',image);
 	},data['slimes'][slime]['rank']*20, slimeItem, image)
